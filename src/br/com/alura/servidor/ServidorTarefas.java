@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ServidorTarefas {
@@ -17,7 +18,7 @@ public class ServidorTarefas {
 	public ServidorTarefas() throws Exception {
 		System.out.println("#### Iniciando servidor ####");
 		this.servidor = new ServerSocket(12345);
-		this.threadPool = Executors.newFixedThreadPool(4);
+		this.threadPool = Executors.newFixedThreadPool(4, new FabricaDeThread());
 		this.estaRodando = new AtomicBoolean(true);
 	}
 
